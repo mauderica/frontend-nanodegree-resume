@@ -187,3 +187,7 @@ function inName(names) {
     names[1] = names[1].toUpperCase();
     return names[0] + " " + names[1] ;
 }
+
+
+// MAP BUILDER
+$("#mapDiv").append(googleMap);
