@@ -126,20 +126,52 @@ for (let i in work.jobs){ // using for-in to iterate over the "jobs" array in th
     }
 } // Is there a more optimal way to do this?
 
+
 // THIS IS MY PROJECTS OBJECT
 var projects = {
     "projects" : [
         {
             "title" : "Portfolio Site",
             "dates" : "2017-2018",
-            "description" : "I created a first draft of my first portfolio site using HTML and CSS and responsive design techniques.",
+            "description" : "I created a first draft of my first portfolio site using HTML and CSS and responsive design techniques. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla laoreet nibh eu mattis efficitur. Sed varius eleifend ex et tincidunt. Curabitur venenatis nisi vitae ante hendrerit ultrices. Donec imperdiet augue felis, sed auctor eros elementum nec. Sed a faucibus mi, in congue sapien. Praesent hendrerit diam nisi, id pharetra est.",
             "images" : [
-                "www.projectimage1.com",
-                "www.projectimage2.com"
+                "http://lorempixel.com/output/cats-q-c-200-200-5.jpg",
+                "http://lorempixel.com/output/cats-q-c-200-200-1.jpg",
+                "http://lorempixel.com/output/cats-q-c-200-200-8.jpg"
+            ]
+        },
+        {
+            "title" : "Resume Builder",
+            "dates" : "2017-2018",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla laoreet nibh eu mattis efficitur. Sed varius eleifend ex et tincidunt. Curabitur venenatis nisi vitae ante hendrerit ultrices. Donec imperdiet augue felis, sed auctor eros elementum nec. Sed a faucibus mi, in congue sapien. Praesent hendrerit diam nisi, id pharetra est.",
+            "images" : [
+                "http://lorempixel.com/output/cats-q-c-200-200-2.jpg",
+                "http://lorempixel.com/output/cats-q-c-200-200-3.jpg",
+                "http://lorempixel.com/output/cats-q-c-200-200-4.jpg"
             ]
         }
     ]
 };
+
+// ENCAPSULATING MY display() FUNCTION WITHIN THE PROJECTS OBJECT & DEFINING THE FUNCTION (WHICH IS ACTUALLY A CUSTOM OBJECT METHOD)
+projects.display = function() {
+    for (let i=0; i<projects.projects.length; ++i) {
+        $("#projects").append(HTMLprojectStart);
+        let formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[i].title);
+        let formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[i].dates);
+        let formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
+        $(".project-entry:last").append(formattedProjectTitle, formattedProjectDates, formattedProjectDescription);
+        for (let j=0; j<projects.projects[i].images.length; ++j) {
+            let formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[j]);
+            $(".project-entry:last").append(formattedProjectImage);
+        }
+    }
+};
+
+// THIS INVOKES MY .display() FUNCTION/METHOD
+projects.display();
+
+
 
 // QUIZ: THIS LOGS THE USER CLICK LOCATIONS TO THE CONSOLE
 $(document).click(function(event) {
