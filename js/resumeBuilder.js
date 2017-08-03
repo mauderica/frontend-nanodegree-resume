@@ -109,15 +109,20 @@ var work = {
 // TODO: Replace for-in loop with a for loop or forEach() --> demonstrating these current best practices is required for the Online Resume project
 for (let i in work.jobs){ // using for-in to iterate over the "jobs" array in the "work" object. Note something like "job" could be used instead of "i", as a more descriptive index name
     if (work.jobs.hasOwnProperty(i)) { // this if-statement is not necessary in this case since for-in is being used to iterate over an array and not an object
-        console.log(work.jobs[i]);
+        // console.log(work.jobs[i]);
         $("#workExperience").append(HTMLworkStart);
         let formattedWorkEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
         let formattedWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[i].title);
         let formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[i].dates);
         let formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[i].location);
         let formattedWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[i].description);
-        $(".work-entry:last").append(formattedWorkEmployer + formattedWorkTitle);
-        $(".work-entry:last").append(formattedWorkDates, formattedWorkLocation, formattedWorkDescription);
+        
+        function displayWork() {
+            $(".work-entry:last").append(formattedWorkEmployer + formattedWorkTitle);
+            $(".work-entry:last").append(formattedWorkDates, formattedWorkLocation, formattedWorkDescription);
+        }
+
+        displayWork();
     }
 } // Is there a more optimal way to do this?
 
@@ -135,3 +140,18 @@ var projects = {
         }
     ]
 };
+
+// QUIZ: THIS LOGS THE USER CLICK LOCATIONS TO THE CONSOLE
+$(document).click(function(event) {
+  logClicks(event.pageX, event.pageY);
+});
+
+
+// QUIZ: APPEND A BUTTON AND CREATE A FUNCTION THAT "INTERNATIONALIZES" A NAME (with the help of helper.js)
+$("#main").append(internationalizeButton);
+function inName(names) {
+    names = names.trim().split(" ");
+    names[0] = names[0].slice(0,1).toUpperCase() + names[0].slice(1).toLowerCase();
+    names[1] = names[1].toUpperCase();
+    return names[0] + " " + names[1] ;
+}
